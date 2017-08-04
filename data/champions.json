@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Garr",
+        "health": 5,
+        "weapon": "Broadsword",
+        "armour": "Iron Mail"
+    },
+    {
+        "name": "Black Arrow",
+        "health": 4,
+        "weapon": "Longbow",
+        "armour": "Leather Jerkin"
+    },
+    {
+        "name": "Xiagoth",
+        "health": 6,
+        "weapon": "Talons",
+        "armour": "Proton Mail"
+    }
+]
