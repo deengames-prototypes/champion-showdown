@@ -87,8 +87,18 @@ class Main:
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
             print("{0}/{1} health, {2} sp".format(self.player.current_health, self.player.total_health, self.player.skill_points))
-            print("Your hand: {0}".format(self.player.hand))
-            print("Your command?")
+            print("Your deck has {0} cards left.".format(len(self.player.deck)))
+            print("")
+            
+            print("You have {0} cards in your hand:".format(len(self.player.hand)))
+
+            i = 1
+            for card in self.player.hand:
+                print("    {0}) {1}".format(i, card.name))
+                i += 1
+            
+            print("")
+            print("Play what card?")
 
             input = sys.stdin.readline().lower().strip()
             if input == "quit":
@@ -96,5 +106,7 @@ class Main:
                 sys.exit(0)
             else:
                 print("That's not a legitimate command, mate.")
+
+            print("")
 
 Main().run()
