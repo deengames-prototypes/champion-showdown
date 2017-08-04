@@ -16,5 +16,11 @@
         "health": 6,
         "weapon": "Talons",
         "armour": "Proton Mail"
+    },
+    {
+        "name": "Jinnsaman",
+        "health": 5,
+        "weapon": "Fists",
+        "armour": "Robe"
     }
 ]

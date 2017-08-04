@@ -14,5 +14,9 @@
     },
     {
         "name": "Katana"
+    },
+    {
+        "name": "Fists",
+        "indestructible": true
     }
 ]
