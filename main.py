@@ -101,11 +101,21 @@ class Main:
             print("Play what card?")
 
             input = sys.stdin.readline().lower().strip()
+
             if input == "quit":
                 print("Bye!")
                 sys.exit(0)
             else:
-                print("That's not a legitimate command, mate.")
+                try:
+                    card_number = int(input) - 1
+                    if card_number >= 0 and card_number < len(self.player.hand):
+                        card = self.player.hand[card_number]
+                        del self.player.hand[card_number]
+                        card.apply(self.player, self.opponent)
+                    else:
+                        print("Card number must be from 1-{0}.".format(len(self.player.hand)))
+                except ValueError:
+                    print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
 
             print("")
 
