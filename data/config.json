@@ -1,3 +1,4 @@
 {
-    "deckSize": 10
+    "deckSize": 10,
+    "handSize": 3
 }

@@ -14,8 +14,9 @@ class Main:
         self.load_json_data()
         self.pick_champions()
         self.distribute_cards()
+
         print("{0} (you) vs. {1}!".format(self.player.name, self.opponent.name))
-        print("Your deck: {0}".format(self.player.cards))
+        self.print_player_stats()
 
     def load_json_data(self):
         # Load JSON data from files
@@ -75,7 +76,15 @@ class Main:
 
     def distribute_cards(self):
         random.shuffle(self.cards)
-        while len(self.player.cards) < self.config["deckSize"]:
-            self.player.cards.append(self.cards.pop())
+
+        while len(self.player.deck) < self.config["deckSize"]:
+            self.player.deck.append(self.cards.pop())
+
+        while len(self.player.hand) < self.config["handSize"]:
+            self.player.hand.append(self.player.deck.pop())
+
+    def print_player_stats(self):
+        print("{0}/{1} health, {2} sp".format(self.player.current_health, self.player.total_health, self.player.skill_points))
+        print("Your hand: {0}".format(self.player.hand))
 
 Main().run()
