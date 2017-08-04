@@ -2,6 +2,7 @@ import json
 import random
 
 from prototype.entities.champion import Champion
+from prototype.entities.cards.action import Action
 from prototype.entities.cards.card import Card
 
 class Main:
@@ -13,7 +14,7 @@ class Main:
 
     def load_json_data(self):
         # Load JSON data from files
-
+        self.cards = []
        
         with open('data/actions.json') as data:
             actions = json.load(data)
@@ -33,17 +34,20 @@ class Main:
         with open('data/weapons.json') as data:
             weapons = json.load(data)
         
+        for data in actions:
+            c = Action(data)
+            self.cards.append(c)
+
+        # Consumables show up several times because they're useful.
+        for item in armour + consumables + consumables + consumables + skills + weapons:
+            c = Card(item["name"])
+            self.cards.append(c)
+
         # Populate class instances from said data
         self.champions = []
         for champ_data in champions:
             c = Champion(champ_data["name"], champ_data["health"], champ_data["weapon"], champ_data["armour"])
             self.champions.append(c)
-
-        self.cards = []
-        # Consumables show up several times because they're useful.
-        for item in actions + armour + consumables + consumables + consumables + skills + weapons:
-            c = Card(item["name"])
-            self.cards.append(c)
 
         print(self.cards)
 
