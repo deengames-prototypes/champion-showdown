@@ -4,6 +4,7 @@ import random
 from prototype.entities.champion import Champion
 from prototype.entities.cards.action import Action
 from prototype.entities.cards.armour import Armour
+from prototype.entities.cards.consumable import Consumable
 from prototype.entities.cards.card import Card
 
 class Main:
@@ -44,7 +45,12 @@ class Main:
             self.cards.append(c)
 
         # Consumables show up several times because they're useful.
-        for item in consumables + consumables + consumables + skills + weapons:
+        for data in consumables:
+            self.cards.append(Consumable(data))
+            self.cards.append(Consumable(data))
+            self.cards.append(Consumable(data))
+
+        for item in skills + weapons:
             c = Card(item["name"])
             self.cards.append(c)
 
