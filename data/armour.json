@@ -1,20 +1,32 @@
 [
     {
-        "name": "Iron Mail"
+        "name": "Iron Mail",
+        "durability": 4,
+        "defense": 5
     },
     {
-        "name": "Leather Jerkin"
+        "name": "Leather Jerkin",
+        "durability": 2,
+        "defense": 2
     },
     {
-        "name": "Proton Mail"
+        "name": "Proton Mail",
+        "durability": 6,
+        "defense": 4
     },
     {
-        "name": "Chainmail"
+        "name": "Chainmail",
+        "durability": 5,
+        "defense": 4
     },
     {
-        "name": "Shadow Cloak"
+        "name": "Shadow Cloak",
+        "durability": 3,
+        "defense": 1
     },
     {
-        "name": "Robe"
+        "name": "Robe",
+        "durability": 1,
+        "defense": 1
     }
 ]

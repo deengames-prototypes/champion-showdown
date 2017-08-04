@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Multi-Strike",
+        "effect": "hits 2x",
+        "cost": 2
+    },
+    {
+        "name": "Wound",
+        "effect": "bleed x3",
+        "cost": 1
+    },
+    {
+        "name": "Ruqqiyah",
+        "effect": "heal +1",
+        "cost": 1
+    },
+    {
+        "name": "Maim",
+        "effect": "destroy-card x1",
+        "cost": 2
+    }
+]

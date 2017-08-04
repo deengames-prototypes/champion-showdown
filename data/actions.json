@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Normal Attack",
+        "damageMultiplier": 1,
+        "hitProbability": 100
+    },
+    {
+        "name": "Critical Strike",
+        "damageMultiplier": 2,
+        "hitProbability": 75
+    },
+    {
+        "name": "Heavy Blow",
+        "damageMultiplier": 1.2,
+        "hitProbability": 100,
+        "special": "hits last"
+    }
+]

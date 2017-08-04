@@ -1,22 +1,32 @@
 [
     {
-        "name": "Broadsword"
+        "name": "Broadsword",
+        "durability": 5,
+        "attack": 5
     },
     {
-        "name": "Longbow"
+        "name": "Longbow",
+        "durability": 7,
+        "attack": 3
     },
     {
         "name": "Talons",
-        "indestructible": true
+        "durability": 99999,
+        "attack": 2
     },
     {
-        "name": "Crossbow"
+        "name": "Crossbow",
+        "durability": 5,
+        "attack": 4
     },
     {
-        "name": "Katana"
+        "name": "Katana",
+        "durability": 3,
+        "attack": 4
     },
     {
         "name": "Fists",
-        "indestructible": true
+        "durability": 99999,
+        "attack": 1
     }
 ]
