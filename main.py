@@ -1,5 +1,6 @@
 import json
 import random
+import sys
 
 from prototype.entities.champion import Champion
 from prototype.entities.cards.action import Action
@@ -84,7 +85,16 @@ class Main:
             self.player.hand.append(self.player.deck.pop())
 
     def print_player_stats(self):
-        print("{0}/{1} health, {2} sp".format(self.player.current_health, self.player.total_health, self.player.skill_points))
-        print("Your hand: {0}".format(self.player.hand))
+        while self.player.current_health > 0 and self.opponent.current_health > 0:
+            print("{0}/{1} health, {2} sp".format(self.player.current_health, self.player.total_health, self.player.skill_points))
+            print("Your hand: {0}".format(self.player.hand))
+            print("Your command?")
+
+            input = sys.stdin.readline().lower().strip()
+            if input == "quit":
+                print("Bye!")
+                sys.exit(0)
+            else:
+                print("That's not a legitimate command, mate.")
 
 Main().run()
