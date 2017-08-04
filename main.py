@@ -13,12 +13,15 @@ class Main:
     def run(self):
         self.load_json_data()
         self.pick_champions()
-        print("{0} vs. {1}!".format(self.player.name, self.opponent.name))
+        self.distribute_cards()
+        print("{0} (you) vs. {1}!".format(self.player.name, self.opponent.name))
+        print("Your deck: {0}".format(self.player.cards))
 
     def load_json_data(self):
         # Load JSON data from files
-        self.cards = []
-       
+        with open('data/config.json') as data:
+            self.config = json.load(data)
+
         with open('data/actions.json') as data:
             actions = json.load(data)
 
@@ -37,6 +40,9 @@ class Main:
         with open('data/weapons.json') as data:
             weapons = json.load(data)
         
+        # Construct classes
+        self.cards = []
+
         for data in actions:
             self.cards.append(Action(data))
 
@@ -62,11 +68,14 @@ class Main:
             c = Champion(champ_data["name"], champ_data["health"], champ_data["weapon"], champ_data["armour"])
             self.champions.append(c)
 
-        print(self.cards)
-
     def pick_champions(self):
         self.player = self.champions[0]
         index = random.randint(1, len(self.champions) - 1)
         self.opponent = self.champions[index]
+
+    def distribute_cards(self):
+        random.shuffle(self.cards)
+        while len(self.player.cards) < self.config["deckSize"]:
+            self.player.cards.append(self.cards.pop())
 
 Main().run()
