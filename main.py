@@ -6,7 +6,7 @@ from prototype.entities.cards.action import Action
 from prototype.entities.cards.armour import Armour
 from prototype.entities.cards.consumable import Consumable
 from prototype.entities.cards.skill import Skill
-from prototype.entities.cards.card import Card
+from prototype.entities.cards.weapon import Weapon
 
 class Main:
     # Main entry point!
@@ -53,9 +53,8 @@ class Main:
         for data in skills:
             self.cards.append(Skill(data))
 
-        for item in weapons:
-            c = Card(item["name"])
-            self.cards.append(c)
+        for data in weapons:
+            self.cards.append(Weapon(data))
 
         # Populate class instances from said data
         self.champions = []
