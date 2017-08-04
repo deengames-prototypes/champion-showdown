@@ -5,6 +5,7 @@ from prototype.entities.champion import Champion
 from prototype.entities.cards.action import Action
 from prototype.entities.cards.armour import Armour
 from prototype.entities.cards.consumable import Consumable
+from prototype.entities.cards.skill import Skill
 from prototype.entities.cards.card import Card
 
 class Main:
@@ -37,20 +38,22 @@ class Main:
             weapons = json.load(data)
         
         for data in actions:
-            c = Action(data)
-            self.cards.append(c)
+            self.cards.append(Action(data))
 
         for data in armour:
-            c = Armour(data)
-            self.cards.append(c)
+            self.cards.append(Armour(data))
 
-        # Consumables show up several times because they're useful.
         for data in consumables:
+            # Consumables show up several times because they're useful.
+            # Create copies, not references
             self.cards.append(Consumable(data))
             self.cards.append(Consumable(data))
             self.cards.append(Consumable(data))
 
-        for item in skills + weapons:
+        for data in skills:
+            self.cards.append(Skill(data))
+
+        for item in weapons:
             c = Card(item["name"])
             self.cards.append(c)
 
