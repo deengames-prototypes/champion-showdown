@@ -6,6 +6,9 @@ class Weapon(Card):
         self.durability = json["durability"]
         self.attack = json["attack"]
 
+    def apply(self, consumer, opponent):
+        consumer.weapon =  self
+
     @staticmethod
     def find(weapons, name):
         for weapon in weapons:

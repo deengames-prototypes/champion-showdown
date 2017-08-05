@@ -6,6 +6,9 @@ class Armour(Card):
         self.durability = json["durability"]
         self.defense = json["defense"]
 
+    def apply(self, consumer, opponent):
+        consumer.armour =  self
+
     @staticmethod
     def find(armours, name):
         for armour in armours:
