@@ -88,13 +88,9 @@ class Main:
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
-            status = "{0}/{1} health, {2} sp.".format(self.player.current_health, self.player.total_health, self.player.skill_points)
-            if self.player.weapon != None:
-                status = "{0} {1} +{2}/{3}d".format(status, self.player.weapon.name, self.player.weapon.damage, self.player.weapon.durability)
-            if self.player.armour != None:
-                status = "{0} {1} +{2}/{3}d".format(status, self.player.armour.name, self.player.armour.defense, self.player.armour.durability)
+            Main.print_status_for(self.opponent, self.opponent.name)
             
-            print(status)
+            Main.print_status_for(self.player, "You")
             print("Your deck has {0} cards left.".format(len(self.player.deck)))
             print("")
             
@@ -126,5 +122,15 @@ class Main:
                     print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
 
             print("")
+
+    @staticmethod
+    def print_status_for(player, name):
+        status = "{3}: {0}/{1} health, {2} sp.".format(player.current_health, player.total_health, player.skill_points, name)
+        if player.weapon != None:
+            status = "{0} {1} +{2}/{3}d".format(status, player.weapon.name, player.weapon.damage, player.weapon.durability)
+        if player.armour != None:
+            status = "{0} {1} +{2}/{3}d".format(status, player.armour.name, player.armour.defense, player.armour.durability)
+        
+        print(status)
 
 Main().run()
