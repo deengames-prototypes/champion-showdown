@@ -67,7 +67,9 @@ class Main:
         # Populate class instances from said data
         self.champions = []
         for champ_data in champions:
-            c = Champion(champ_data["name"], champ_data["health"], champ_data["weapon"], champ_data["armour"])
+            weapon_data = Weapon.find(weapons, champ_data["weapon"])
+            armour_data = Armour.find(armour, champ_data["armour"])
+            c = Champion(champ_data["name"], champ_data["health"], weapon_data, armour_data)
             self.champions.append(c)
 
     def pick_champions(self):
@@ -86,11 +88,17 @@ class Main:
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
-            print("{0}/{1} health, {2} sp".format(self.player.current_health, self.player.total_health, self.player.skill_points))
+            status = "{0}/{1} health, {2} sp.".format(self.player.current_health, self.player.total_health, self.player.skill_points)
+            if self.player.weapon != None:
+                status = "{0} {1} +{2}/{3}d".format(status, self.player.weapon.name, self.player.weapon.attack, self.player.weapon.durability)
+            if self.player.armour != None:
+                status = "{0} {1} +{2}/{3}d".format(status, self.player.armour.name, self.player.armour.defense, self.player.armour.durability)
+            
+            print(status)
             print("Your deck has {0} cards left.".format(len(self.player.deck)))
             print("")
             
-            print("You have {0} cards in your hand:".format(len(self.player.hand)))
+            print("You have {0} cards in your hand:".format(len(self.player.hand)))            
 
             i = 1
             for card in self.player.hand:

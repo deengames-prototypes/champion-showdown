@@ -5,3 +5,11 @@ class Weapon(Card):
         super().__init__(json["name"])
         self.durability = json["durability"]
         self.attack = json["attack"]
+
+    @staticmethod
+    def find(weapons, name):
+        for weapon in weapons:
+            if weapon["name"].lower() == name.lower():
+                return weapon
+
+        return None
