@@ -12,7 +12,7 @@ class Champion:
         # Stuff that's not champion data but player data. Yeah, I know, it's a prototype.
         self.deck = []
         self.hand = []
-        self.skill_points = 20
+        self.skill_points = 0
         # hits for one damage each time you take a turn
         self.bleeds_left = 0
 
