@@ -15,3 +15,5 @@ class Action(Card):
             opponent.get_hurt(total_damage)
         else:
             print("{0} misses his {1}!".format(consumer.name, self.name))
+        
+        return True

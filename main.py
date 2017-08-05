@@ -79,12 +79,15 @@ class Main:
 
     def distribute_cards(self):
         random.shuffle(self.cards)
+        self._give_cards_to(self.player)
+        self._give_cards_to(self.opponent)        
 
-        while len(self.player.deck) < self.config["deckSize"]:
-            self.player.deck.append(self.cards.pop())
+    def _give_cards_to(self, player):
+        while len(player.deck) < self.config["deckSize"]:
+            player.deck.append(self.cards.pop())
 
-        while len(self.player.hand) < self.config["handSize"]:
-            self.player.hand.append(self.player.deck.pop())
+        while len(player.hand) < self.config["handSize"]:
+            player.hand.append(player.deck.pop())
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
@@ -116,6 +119,10 @@ class Main:
                         card = self.player.hand[card_number]
                         del self.player.hand[card_number]
                         card.apply(self.player, self.opponent)
+
+                        if self.player.bleeds_left > 0:
+                            self.player.get_damage(1)
+                            print("{0} bleeds for 1 damage!".format(self.player.name))                            
                     else:
                         print("Card number must be from 1-{0}.".format(len(self.player.hand)))
                 except ValueError:
@@ -125,7 +132,9 @@ class Main:
 
     @staticmethod
     def print_status_for(player, name):
-        status = "{3}: {0}/{1} health, {2} sp.".format(player.current_health, player.total_health, player.skill_points, name)
+        status = "{3}{4}: {0}/{1} health, {2} sp.".format(
+            player.current_health, player.total_health, player.skill_points, name,
+            " (bleeding)" if player.bleeds_left > 0 else "")
         if player.weapon != None:
             status = "{0} {1} +{2}/{3}d".format(status, player.weapon.name, player.weapon.damage, player.weapon.durability)
         if player.armour != None:

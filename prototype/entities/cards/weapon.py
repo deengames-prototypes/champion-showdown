@@ -8,6 +8,7 @@ class Weapon(Card):
 
     def apply(self, consumer, opponent):
         consumer.weapon =  self
+        return True
 
     @staticmethod
     def find(weapons, name):

@@ -8,6 +8,7 @@ class Armour(Card):
 
     def apply(self, consumer, opponent):
         consumer.armour =  self
+        return True
 
     @staticmethod
     def find(armours, name):
