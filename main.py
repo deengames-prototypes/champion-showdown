@@ -90,7 +90,7 @@ class Main:
         while self.player.current_health > 0 and self.opponent.current_health > 0:
             status = "{0}/{1} health, {2} sp.".format(self.player.current_health, self.player.total_health, self.player.skill_points)
             if self.player.weapon != None:
-                status = "{0} {1} +{2}/{3}d".format(status, self.player.weapon.name, self.player.weapon.attack, self.player.weapon.durability)
+                status = "{0} {1} +{2}/{3}d".format(status, self.player.weapon.name, self.player.weapon.damage, self.player.weapon.durability)
             if self.player.armour != None:
                 status = "{0} {1} +{2}/{3}d".format(status, self.player.armour.name, self.player.armour.defense, self.player.armour.durability)
             

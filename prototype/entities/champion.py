@@ -13,3 +13,9 @@ class Champion:
         self.deck = []
         self.hand = []
         self.skill_points = 0
+
+    # Player method
+    def get_hurt(self, damage):
+        self.current_health -= damage
+        if self.current_health <= 0:
+            print("{0} dies!".format(self.name))

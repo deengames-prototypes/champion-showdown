@@ -2,31 +2,31 @@
     {
         "name": "Broadsword",
         "durability": 5,
-        "attack": 5
+        "damage": 5
     },
     {
         "name": "Longbow",
         "durability": 7,
-        "attack": 3
+        "damage": 3
     },
     {
         "name": "Talons",
         "durability": 99999,
-        "attack": 2
+        "damage": 2
     },
     {
         "name": "Crossbow",
         "durability": 5,
-        "attack": 4
+        "damage": 4
     },
     {
         "name": "Katana",
         "durability": 3,
-        "attack": 4
+        "damage": 4
     },
     {
         "name": "Fists",
         "durability": 99999,
-        "attack": 1
+        "damage": 1
     }
 ]

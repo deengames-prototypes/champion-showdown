@@ -11,8 +11,7 @@
     },
     {
         "name": "Heavy Blow",
-        "damageMultiplier": 1.2,
-        "hitProbability": 100,
-        "special": "hits last"
+        "damageMultiplier": 1.5,
+        "hitProbability": 80
     }
 ]

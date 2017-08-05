@@ -4,7 +4,7 @@ class Weapon(Card):
     def __init__(self, json):
         super().__init__(json["name"])
         self.durability = json["durability"]
-        self.attack = json["attack"]
+        self.damage = json["damage"]
 
     def apply(self, consumer, opponent):
         consumer.weapon =  self
