@@ -157,13 +157,16 @@ class Main:
                     except ValueError:
                         print("That's not a number, mate. Enter the number of the card to use; type 'draw' to draw another card, 'a' or 'attack' to attack, or type 'quit' to quit.")
             else:
-                self._draw_cards(self.opponent)
-                if len(self.opponent.hand) > 0:
-                    card = random.choice(self.opponent.hand)
-                    Main.process_turn(self.opponent, self.player, card)
+                if random.randint(1, 100) <= self.config["enemyAttackChance"]:
+                    Main._attack(self.opponent, self.player)
                 else:
-                    print("{0} is out of cards! {0} abdicates! YOU WIN!".format(self.opponent.name))
-                    sys.exit(0)
+                    self._draw_cards(self.opponent)
+                    if len(self.opponent.hand) > 0:
+                        card = random.choice(self.opponent.hand)
+                        Main.process_turn(self.opponent, self.player, card)
+                    else:
+                        print("{0} is out of cards! {0} abdicates! YOU WIN!".format(self.opponent.name))
+                        sys.exit(0)
                 self.whoseTurn = WhoseTurn.PLAYER
                 time.sleep(0.5)                
 

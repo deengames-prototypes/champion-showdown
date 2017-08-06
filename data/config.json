@@ -1,4 +1,5 @@
 {
     "deckSize": 20,
-    "handSize": 3
+    "handSize": 3,
+    "enemyAttackChance": 35
 }
