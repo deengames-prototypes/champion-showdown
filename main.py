@@ -57,6 +57,7 @@ class Main:
             # Consumables show up several times because they're basic attacks.
             self.cards.append(Action(data))
             self.cards.append(Action(data))
+            self.cards.append(Action(data))
 
         for data in armour:
             self.cards.append(Armour(data))
@@ -97,7 +98,7 @@ class Main:
             player.deck.append(self.cards.pop())
 
         while len(player.hand) < self.config["handSize"]:
-            player.hand.append(player.deck.pop())
+            self._draw_card(player)
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
@@ -131,6 +132,7 @@ class Main:
                             took_action = Main.process_turn(self.player, self.opponent, card)
 
                             if took_action:
+                                self._draw_card(self.player)                                
                                 self.whoseTurn = WhoseTurn.AI
                                 time.sleep(0.5)                                
                         else:
@@ -138,12 +140,22 @@ class Main:
                     except ValueError:
                         print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
             else:
+                self._draw_card(self.opponent)                
                 card = random.choice(self.opponent.hand)
                 Main.process_turn(self.opponent, self.player, card)
                 self.whoseTurn = WhoseTurn.PLAYER
                 time.sleep(0.5)                
 
             print("")
+    
+    def _draw_card(self, player):
+        if len(player.deck) > 0:
+            card = player.deck.pop()
+            player.hand.append(card)
+            if (player == self.player):
+                print("You draw a {0} card".format(card.name))  
+        else:
+            print("{0}'s deck is empty!".format(player.name))
 
     @staticmethod
     def process_turn(player, opponent, card):
