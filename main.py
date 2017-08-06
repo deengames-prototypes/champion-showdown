@@ -76,6 +76,7 @@ class Main:
 
         for data in weapons:
             self.cards.append(Weapon(data))
+            self.cards.append(Weapon(data))
 
         # Populate class instances from said data
         self.champions = []
@@ -153,9 +154,12 @@ class Main:
                     except ValueError:
                         print("That's not a number, mate. Enter the number of the card to use; type 'draw' to draw another card, 'a' or 'attack' to attack, or type 'quit' to quit.")
             else:
-                self._draw_cards(self.opponent)                
-                card = random.choice(self.opponent.hand)
-                Main.process_turn(self.opponent, self.player, card)
+                self._draw_cards(self.opponent)
+                if len(self.opponent.hand) > 0:
+                    card = random.choice(self.opponent.hand)
+                    Main.process_turn(self.opponent, self.player, card)
+                else:
+                    print("{0} is out of cards!".format(self.opponent.name))
                 self.whoseTurn = WhoseTurn.PLAYER
                 time.sleep(0.5)                
 

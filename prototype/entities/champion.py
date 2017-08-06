@@ -17,15 +17,18 @@ class Champion:
         self.bleeds_left = 0
 
     def get_hurt(self, damage):
-        self.current_health -= damage
-        if self.current_health <= 0:
-            print("{0} dies!".format(self.name))
-        if self.armour != None:
-            self.armour.durability -= 1
-            if self.armour.durability <= 0:
-                print("{0}'s {1} is destroyed!".format(self.name, self.armour.name))
-                self.armour = None
-
+        if damage > 0:
+            self.current_health -= damage
+            if self.current_health <= 0:
+                print("{0} dies!".format(self.name))
+            if self.armour != None:
+                self.armour.durability -= 1
+                if self.armour.durability <= 0:
+                    print("{0}'s {1} is destroyed!".format(self.name, self.armour.name))
+                    self.armour = None
+        else:
+            print("{0} didn't get hurt!".format(self.name))
+            
     def attacks(self):
         if self.weapon != None:
             self.weapon.durability -= 1

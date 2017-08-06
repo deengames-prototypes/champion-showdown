@@ -38,9 +38,9 @@ def hit_opponent(attacker, target, skill_name, times):
     else:
         print("{0} is ineffective against {1}!".format(skill_name, target.name))
 
-def bleed_opponent(target, times):
+def bleed_opponent(attacker, target, times):
     target.bleeds_left += times
-    print("{0} starts bleeding!".format(target.name))
+    print("{0} wounds {1}! {1} starts bleeding!".format(attacker.name, target.name))
 
 def heal(me, amount):
     amount = me.heal(amount)
@@ -57,7 +57,7 @@ def destroy_opponent_cards(target, n):
     
 APPLY_EFFECTS = {
     'hits': lambda attacker, target, skill, times: hit_opponent(attacker, target, skill.name, times),
-    'bleed': lambda attacker, target, skill, times: bleed_opponent(target, times),
+    'bleed': lambda attacker, target, skill, times: bleed_opponent(attacker, target, times),
     'heal': lambda me, opponent, skill, amount: heal(me, amount),
     'destroy-card': lambda attacker, target, skill, n: destroy_opponent_cards(target, n)
 }
