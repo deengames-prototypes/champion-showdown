@@ -149,13 +149,13 @@ class Main:
             print("")
     
     def _draw_card(self, player):
-        if len(player.deck) > 0:
+        while len(player.deck) > 0 and len(player.hand) < self.config["handSize"]:
             card = player.deck.pop()
             player.hand.append(card)
             if (player == self.player):
-                print("You draw a {0} card".format(card.name))  
-        else:
-            print("{0}'s deck is empty!".format(player.name))
+                print("You draw a {0} card".format(card.name))
+            else:
+                print("{0} draws a card".format(player.name))
 
     @staticmethod
     def process_turn(player, opponent, card):

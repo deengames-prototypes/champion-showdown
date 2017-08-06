@@ -21,7 +21,7 @@ class Skill(Card):
 
             return True
         else:
-            print("You need {0} skill points to use {1} (you have {2})".format(self.cost, self.name, consumer.skill_points))
+            print("{3} needs {0} skill points to use {1} (you have {2})".format(self.cost, self.name, consumer.skill_points, consumer.name))
 
             return False
 
