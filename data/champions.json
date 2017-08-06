@@ -1,25 +1,25 @@
 [
     {
         "name": "Garr",
-        "health": 5,
+        "health": 50,
         "weapon": "Broadsword",
         "armour": "Iron Mail"
     },
     {
         "name": "Black Arrow",
-        "health": 4,
+        "health": 40,
         "weapon": "Longbow",
         "armour": "Leather Jerkin"
     },
     {
         "name": "Xiagoth",
-        "health": 6,
+        "health": 60,
         "weapon": "Talons",
         "armour": "Proton Mail"
     },
     {
         "name": "Jinnsaman",
-        "health": 5,
+        "health": 50,
         "weapon": "Fists",
         "armour": "Robe"
     }

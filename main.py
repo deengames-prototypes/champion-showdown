@@ -1,6 +1,8 @@
+from enum import Enum
 import json
 import random
 import sys
+import time
 
 from prototype.entities.champion import Champion
 from prototype.entities.cards.action import Action
@@ -9,9 +11,15 @@ from prototype.entities.cards.consumable import Consumable
 from prototype.entities.cards.skill import Skill
 from prototype.entities.cards.weapon import Weapon
 
+class WhoseTurn(Enum):
+    PLAYER = 1
+    AI = 2
+
 class Main:
     # Main entry point!
     def run(self):
+        self.whoseTurn = WhoseTurn.PLAYER
+
         self.load_json_data()
         self.pick_champions()
         self.distribute_cards()
@@ -46,6 +54,8 @@ class Main:
         self.cards = []
 
         for data in actions:
+            # Consumables show up several times because they're basic attacks.
+            self.cards.append(Action(data))
             self.cards.append(Action(data))
 
         for data in armour:
@@ -91,44 +101,63 @@ class Main:
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
-            Main.print_status_for(self.opponent, self.opponent.name)
-            
+            Main.print_status_for(self.opponent, self.opponent.name)            
             Main.print_status_for(self.player, "You")
-            print("Your deck has {0} cards left.".format(len(self.player.deck)))
-            print("")
-            
-            print("You have {0} cards in your hand:".format(len(self.player.hand)))            
 
-            i = 1
-            for card in self.player.hand:
-                print("    {0}) {1}".format(i, card.name))
-                i += 1
-            
-            print("")
-            print("Play what card?")
+            if self.whoseTurn == WhoseTurn.PLAYER:
 
-            input = sys.stdin.readline().lower().strip()
+                print("Your deck has {0} cards left.".format(len(self.player.deck)))
+                print("")
+                
+                print("You have {0} cards in your hand:".format(len(self.player.hand)))            
 
-            if input == "quit":
-                print("Bye!")
-                sys.exit(0)
+                i = 1
+                for card in self.player.hand:
+                    print("    {0}) {1}".format(i, card.name))
+                    i += 1
+                
+                print("")
+                print("Play what card?")
+
+                input = sys.stdin.readline().lower().strip()
+
+                if input == "quit":
+                    print("Bye!")
+                    sys.exit(0)
+                else:
+                    try:
+                        card_number = int(input) - 1
+                        if card_number >= 0 and card_number < len(self.player.hand):
+                            card = self.player.hand[card_number]
+                            took_action = Main.process_turn(self.player, self.opponent, card)
+
+                            if took_action:
+                                card = self.player.hand[card_number]                                
+                                self.whoseTurn = WhoseTurn.AI
+                                time.sleep(0.5)                                
+                        else:
+                            print("Card number must be from 1-{0}.".format(len(self.player.hand)))
+                    except ValueError:
+                        print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
             else:
-                try:
-                    card_number = int(input) - 1
-                    if card_number >= 0 and card_number < len(self.player.hand):
-                        card = self.player.hand[card_number]
-                        del self.player.hand[card_number]
-                        card.apply(self.player, self.opponent)
-
-                        if self.player.bleeds_left > 0:
-                            self.player.get_damage(1)
-                            print("{0} bleeds for 1 damage!".format(self.player.name))                            
-                    else:
-                        print("Card number must be from 1-{0}.".format(len(self.player.hand)))
-                except ValueError:
-                    print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
+                card = random.choice(self.opponent.hand)
+                Main.process_turn(self.opponent, self.player, card)
+                self.whoseTurn = WhoseTurn.PLAYER
+                time.sleep(0.5)                
 
             print("")
+
+    @staticmethod
+    def process_turn(player, opponent, card):
+        took_action = card.apply(player, opponent)
+
+        if took_action:
+            player.hand.remove(card)
+            if player.bleeds_left > 0:
+                player.get_damage(1)
+                print("{0} bleeds for 1 damage!".format(player.name))
+
+        return took_action
 
     @staticmethod
     def print_status_for(player, name):
