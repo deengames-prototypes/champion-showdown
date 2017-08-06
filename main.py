@@ -58,6 +58,7 @@ class Main:
             self.cards.append(Action(data))
             self.cards.append(Action(data))
             self.cards.append(Action(data))
+            self.cards.append(Action(data))
 
         for data in armour:
             self.cards.append(Armour(data))

@@ -1,18 +1,18 @@
 [
     {
         "name": "Small Health Potion",
-        "effect": "health +1"
+        "effect": "health +10"
     },
     {
         "name": "Large Health Potion",
-        "effect": "health +2"
+        "effect": "health +20"
     },
     {
         "name": "Skill Points Potion",
-        "effect": "skillpoints +1"
+        "effect": "skillpoints +10"
     },
     {
         "name": "Large Skill Points Potion",
-        "effect": "skillpoints +2"
+        "effect": "skillpoints +20"
     }
 ]

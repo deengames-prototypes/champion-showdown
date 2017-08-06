@@ -13,6 +13,7 @@ class Action(Card):
             total_damage = (consumer.weapon.damage or 1) * self.damage_multiplier
             print("{0} {1}s {2} for {3} damage!".format(consumer.name, self.name, opponent.name, total_damage))            
             opponent.get_hurt(total_damage)
+            consumer.attacks()
         else:
             print("{0} misses his {1}!".format(consumer.name, self.name))
         

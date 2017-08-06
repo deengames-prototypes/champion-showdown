@@ -21,3 +21,16 @@ class Champion:
         self.current_health -= damage
         if self.current_health <= 0:
             print("{0} dies!".format(self.name))
+        if self.armour != None:
+            self.armour.durability -= 1
+            if self.armour.durability <= 0:
+                print("{0}'s {1} is destroyed!".format(self.name, self.armour.name))
+                self.armour = None
+
+    # Player method
+    def attacks(self):
+        if self.weapon != None:
+            self.weapon.durability -= 1
+            if self.weapon.durability <= 0:
+                print("{0}'s {1} breaks!".format(self.name, self.weapon.name))
+                self.weapon = None

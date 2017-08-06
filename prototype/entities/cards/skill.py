@@ -29,7 +29,7 @@ class Skill(Card):
 # These are part of the module, not the class.
 
 def hit_opponent(attacker, target, skill_name, times):
-    damage = (attacker.weapon.damage or 1) - (target.armour.defense or 0)
+    damage = (1 if attacker.weapon is None else attacker.weapon.damage) - (0 if target.armour is None else target.armour.defense)
     damage = damage * times
     if damage > 0:
         target.get_hurt(damage)
