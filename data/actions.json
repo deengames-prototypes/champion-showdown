@@ -1,7 +1,7 @@
 [
     {
-        "name": "Normal Attack",
-        "damageMultiplier": 1,
+        "name": "Aimed Attack",
+        "damageMultiplier": 1.2,
         "hitProbability": 100
     },
     {

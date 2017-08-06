@@ -113,6 +113,9 @@ class Main:
                 
                 print("You have {0} cards in your hand:".format(len(self.player.hand)))            
 
+                if self.player.weapon != None:
+                    print("    a) Attack with {0}".format(self.player.weapon.name))
+
                 i = 1
                 for card in self.player.hand:
                     print("    {0}) {1}".format(i, card.name))
@@ -123,11 +126,15 @@ class Main:
 
                 input = sys.stdin.readline().lower().strip()
 
-                if input == "quit":
+                if input == "q" or input == "quit":
                     print("Bye!")
                     sys.exit(0)
                 elif input == "draw":
                     self._get_card(self.player)                                
+                    self.whoseTurn = WhoseTurn.AI
+                    time.sleep(0.5)
+                elif input == "a" or input == "attack":
+                    Main._attack(self.player, self.opponent)
                     self.whoseTurn = WhoseTurn.AI
                     time.sleep(0.5)
                 else:
@@ -144,7 +151,7 @@ class Main:
                         else:
                             print("Card number must be from 1-{0}.".format(len(self.player.hand)))
                     except ValueError:
-                        print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
+                        print("That's not a number, mate. Enter the number of the card to use; type 'draw' to draw another card, 'a' or 'attack' to attack, or type 'quit' to quit.")
             else:
                 self._draw_cards(self.opponent)                
                 card = random.choice(self.opponent.hand)
@@ -188,10 +195,17 @@ class Main:
             player.current_health, player.total_health, player.skill_points, name,
             " (bleeding)" if player.bleeds_left > 0 else "")
         if player.weapon != None:
-            status = "{0} {1} +{2}/{3}d".format(status, player.weapon.name, player.weapon.damage, player.weapon.durability)
+            status = "{0} {1} +{2}/{3} durability".format(status, player.weapon.name, player.weapon.damage, player.weapon.durability)
         if player.armour != None:
-            status = "{0} {1} +{2}/{3}d".format(status, player.armour.name, player.armour.defense, player.armour.durability)
+            status = "{0} {1} +{2}/{3} durability".format(status, player.armour.name, player.armour.defense, player.armour.durability)
         
         print(status)
+
+    @staticmethod
+    def _attack(attacker, target):
+        damage = (1 if attacker.weapon is None else attacker.weapon.damage) - (0 if target.armour is None else target.armour.defense)
+        print("{0} attacks {1} for {2} damage!".format(attacker.name, target.name, damage))
+        target.get_hurt(damage)
+        attacker.attacks()            
 
 Main().run()

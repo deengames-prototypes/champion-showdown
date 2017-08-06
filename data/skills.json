@@ -11,7 +11,7 @@
     },
     {
         "name": "Ruqqiyah",
-        "effect": "heal +1",
+        "effect": "heal +5",
         "cost": 7
     },
     {
