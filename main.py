@@ -99,7 +99,7 @@ class Main:
             player.deck.append(self.cards.pop())
 
         while len(player.hand) < self.config["handSize"]:
-            self._draw_card(player)
+            self._draw_cards(player)
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
@@ -125,6 +125,10 @@ class Main:
                 if input == "quit":
                     print("Bye!")
                     sys.exit(0)
+                elif input == "draw":
+                    self._get_card(self.player)                                
+                    self.whoseTurn = WhoseTurn.AI
+                    time.sleep(0.5)
                 else:
                     try:
                         card_number = int(input) - 1
@@ -133,15 +137,15 @@ class Main:
                             took_action = Main.process_turn(self.player, self.opponent, card)
 
                             if took_action:
-                                self._draw_card(self.player)                                
+                                self._draw_cards(self.player)                                
                                 self.whoseTurn = WhoseTurn.AI
-                                time.sleep(0.5)                                
+                                time.sleep(0.5)
                         else:
                             print("Card number must be from 1-{0}.".format(len(self.player.hand)))
                     except ValueError:
                         print("That's not a number, mate. Enter the number of the card to use, or type 'quit' to quit.")            
             else:
-                self._draw_card(self.opponent)                
+                self._draw_cards(self.opponent)                
                 card = random.choice(self.opponent.hand)
                 Main.process_turn(self.opponent, self.player, card)
                 self.whoseTurn = WhoseTurn.PLAYER
@@ -149,14 +153,17 @@ class Main:
 
             print("")
     
-    def _draw_card(self, player):
-        while len(player.deck) > 0 and len(player.hand) < self.config["handSize"]:
-            card = player.deck.pop()
-            player.hand.append(card)
-            if (player == self.player):
-                print("You draw a {0} card".format(card.name))
-            else:
-                print("{0} draws a card".format(player.name))
+    def _draw_cards(self, champion):
+        while len(champion.deck) > 0 and len(champion.hand) < self.config["handSize"]:
+            self._get_card(champion)
+
+    def _get_card(self, champion):
+        card = champion.deck.pop()
+        champion.hand.append(card)
+        if (champion == self.player):
+            print("You draw a {0} card".format(card.name))
+        else:
+            print("{0} draws a card".format(champion.name))
 
     @staticmethod
     def process_turn(player, opponent, card):
