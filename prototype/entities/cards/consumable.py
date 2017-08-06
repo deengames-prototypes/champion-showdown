@@ -18,3 +18,5 @@ class Consumable(Card):
             print("{0} heals {1} skill points!".format(consumer.name, amount))
         else:
             raise NotImplementedError("Not sure how to consume a '{0}' consumable".format(apply))
+
+        return True
