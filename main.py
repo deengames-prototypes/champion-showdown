@@ -4,6 +4,13 @@ import random
 import sys
 import time
 
+# Support for PyInstaller --onefile. It creates an archive exe that
+# unpacks to a temp directory. We need to convince all our file I/O
+# to use that directoy as the application base dir. chdir is the
+# easiest way, if we use relative paths for everything else.
+if hasattr(sys, '_MEIPASS'):
+    os.chdir(sys._MEIPASS)
+    
 from prototype.entities.champion import Champion
 from prototype.entities.cards.action import Action
 from prototype.entities.cards.armour import Armour
