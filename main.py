@@ -110,6 +110,9 @@ class Main:
                 Main.print_status_for(self.player, "You")
 
                 print("Your deck has {0} cards left.".format(len(self.player.deck)))
+                if len(self.player.deck) == 0 and len(self.player.hand) == 0:
+                    print("You run out of cards! You abdicate! YOU LOSE!")
+                    sys.exit(0)
                 print("")
                 
                 print("You have {0} cards in your hand:".format(len(self.player.hand)))            
@@ -130,7 +133,7 @@ class Main:
                 if input == "q" or input == "quit":
                     print("Bye!")
                     sys.exit(0)
-                elif input == "draw":
+                elif input == "d" or input == "draw":
                     self._get_card(self.player)                                
                     self.whoseTurn = WhoseTurn.AI
                     time.sleep(0.5)
@@ -159,7 +162,8 @@ class Main:
                     card = random.choice(self.opponent.hand)
                     Main.process_turn(self.opponent, self.player, card)
                 else:
-                    print("{0} is out of cards!".format(self.opponent.name))
+                    print("{0} is out of cards! {0} abdicates! YOU WIN!".format(self.opponent.name))
+                    sys.exit(0)
                 self.whoseTurn = WhoseTurn.PLAYER
                 time.sleep(0.5)                
 
