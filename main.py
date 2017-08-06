@@ -132,7 +132,6 @@ class Main:
                             took_action = Main.process_turn(self.player, self.opponent, card)
 
                             if took_action:
-                                card = self.player.hand[card_number]                                
                                 self.whoseTurn = WhoseTurn.AI
                                 time.sleep(0.5)                                
                         else:
@@ -154,7 +153,8 @@ class Main:
         if took_action:
             player.hand.remove(card)
             if player.bleeds_left > 0:
-                player.get_damage(1)
+                player.bleeds_left -= 1
+                player.get_hurt(1)
                 print("{0} bleeds for 1 damage!".format(player.name))
 
         return took_action
