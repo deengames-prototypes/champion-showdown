@@ -43,7 +43,7 @@ def bleed_opponent(target, times):
     print("{0} starts bleeding!".format(target.name))
 
 def heal(me, amount):
-    me.current_health += amount
+    amount = me.heal(amount)
     print("{0} heals for {1}!".format(me.name, amount))
 
 def destroy_opponent_cards(target, n):

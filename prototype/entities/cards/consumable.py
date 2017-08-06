@@ -11,7 +11,7 @@ class Consumable(Card):
         amount = int(self.effect[index:].strip().replace('+', ''))
 
         if apply == "health":
-            consumer.current_health += amount
+            amount = consumer.heal(amount)
             print("{0} heals {1} health!".format(consumer.name, amount))
         elif apply == "skillpoints":
             consumer.skill_points += amount

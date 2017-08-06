@@ -9,14 +9,13 @@ class Champion:
         self.weapon = Weapon(weapon_data)
         self.armour = Armour(armour_data)
 
-        # Stuff that's not champion data but player data. Yeah, I know, it's a prototype.
+        # Non-prototype stuff
         self.deck = []
         self.hand = []
         self.skill_points = 0
         # hits for one damage each time you take a turn
         self.bleeds_left = 0
 
-    # Player method
     def get_hurt(self, damage):
         self.current_health -= damage
         if self.current_health <= 0:
@@ -27,10 +26,14 @@ class Champion:
                 print("{0}'s {1} is destroyed!".format(self.name, self.armour.name))
                 self.armour = None
 
-    # Player method
     def attacks(self):
         if self.weapon != None:
             self.weapon.durability -= 1
             if self.weapon.durability <= 0:
                 print("{0}'s {1} breaks!".format(self.name, self.weapon.name))
                 self.weapon = None
+
+    def heal(self, amount):
+        amount = min(amount, self.total_health - self.current_health)
+        self.current_health += amount
+        return amount
