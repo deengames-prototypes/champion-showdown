@@ -8,6 +8,7 @@ class Weapon(Card):
 
     def apply(self, consumer, opponent):
         consumer.weapon =  self
+        print("{0} now wields {1}!".format(consumer.name, self.name))
         return True
 
     @staticmethod

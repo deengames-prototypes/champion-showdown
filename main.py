@@ -101,10 +101,9 @@ class Main:
 
     def print_player_stats(self):
         while self.player.current_health > 0 and self.opponent.current_health > 0:
-            Main.print_status_for(self.opponent, self.opponent.name)            
-            Main.print_status_for(self.player, "You")
-
             if self.whoseTurn == WhoseTurn.PLAYER:
+                Main.print_status_for(self.opponent, self.opponent.name)            
+                Main.print_status_for(self.player, "You")
 
                 print("Your deck has {0} cards left.".format(len(self.player.deck)))
                 print("")

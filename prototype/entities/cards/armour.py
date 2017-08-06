@@ -8,6 +8,7 @@ class Armour(Card):
 
     def apply(self, consumer, opponent):
         consumer.armour =  self
+        print("{0} puts on the {1}".format(consumer.name, self.name))
         return True
 
     @staticmethod

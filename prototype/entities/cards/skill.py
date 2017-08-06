@@ -30,7 +30,6 @@ class Skill(Card):
 
 def hit_opponent(attacker, target, skill_name, times):
     damage = (attacker.weapon.damage or 1) - (target.armour.defense or 0)
-    print('d={0}'.format(damage))
     damage = damage * times
     if damage > 0:
         target.get_hurt(damage)
