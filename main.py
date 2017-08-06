@@ -24,6 +24,7 @@ class Main:
         self.pick_champions()
         self.distribute_cards()
 
+        print("")
         print("{0} (you) vs. {1}!".format(self.player.name, self.opponent.name))
         self.print_player_stats()
 
@@ -158,12 +159,15 @@ class Main:
             self._get_card(champion)
 
     def _get_card(self, champion):
-        card = champion.deck.pop()
-        champion.hand.append(card)
-        if (champion == self.player):
-            print("You draw a {0} card".format(card.name))
+        if len(champion.deck) > 0:
+            card = champion.deck.pop()
+            champion.hand.append(card)
+            if (champion == self.player):
+                print("You draw a {0} card".format(card.name))
+            else:
+                print("{0} draws a card".format(champion.name))
         else:
-            print("{0} draws a card".format(champion.name))
+            print("{0}'s deck is empty!".format(champion.name))
 
     @staticmethod
     def process_turn(player, opponent, card):
